@@ -89,7 +89,7 @@ function Lista_favorito() {
             <span className={`text-gray-900 font-mono ${favorito.favorito ? '' : 'opacity-50'}`}>
               {favorito.nombre}
             </span>
-            <div>
+            <div className='flex'>
               <button onClick={() => cambiarFavorito(index)} className="
               text-xl 
               text-gray-500 
@@ -101,7 +101,8 @@ function Lista_favorito() {
               text-red-400 
               hover:text-red-600 
               text-xl 
-              ml-2">
+              ml-2
+              ">
                 <AiOutlineDelete />
               </button>
             </div>
