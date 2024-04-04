@@ -6,8 +6,8 @@ function Lista_favorito() {
   const [nuevoFavorito, setNuevoFavorito] = useState('');
 
   useEffect(() => {
-    const storedFavorites = JSON.parse(localStorage.getItem('favoritos')) || [];
-    setFavoritos(storedFavorites);
+    const procesarFavoritos = JSON.parse(localStorage.getItem('favoritos')) || [];
+    setFavoritos(procesarFavoritos);
   }, []);
 
   const handleInputChange = (event) => {
@@ -16,23 +16,30 @@ function Lista_favorito() {
 
   const agregarFavorito = () => {
     if (nuevoFavorito.trim() !== '') {
-      const updatedFavorites = [...favoritos, { nombre: nuevoFavorito, favorito: false }];
-      setFavoritos(updatedFavorites);
+      const actualizarfavoritos = [...favoritos, { nombre: nuevoFavorito, favorito: false }];
+      setFavoritos(actualizarfavoritos);
       setNuevoFavorito('');
     }
   };
 
   const cambiarFavorito = (index) => {
-    const updatedFavorites = [...favoritos];
-    updatedFavorites[index].favorito = !updatedFavorites[index].favorito;
-    setFavoritos(updatedFavorites);
-    localStorage.setItem('favoritos', JSON.stringify(updatedFavorites.filter(f => f.favorito)));
+    const actualizarfavoritos = [...favoritos];
+    actualizarfavoritos[index].favorito = !actualizarfavoritos[index].favorito;
+    setFavoritos(actualizarfavoritos);
+    localStorage.setItem('favoritos', JSON.stringify(actualizarfavoritos.filter(f => f.favorito)));
+
+    //(actualizarfavoritos[index].favorito) ? alert('Agregado a favoritos...') : alert('Elminado de favoritos...');  
+
   };
 
   const eliminarFavorito = (index) => {
-    const updatedFavorites = favoritos.filter((_, i) => i !== index);
-    setFavoritos(updatedFavorites);
-    localStorage.setItem('favoritos', JSON.stringify(updatedFavorites));
+      const confirmacion = confirm('¿Deseas eliminar este elemento de tus favoritos?');
+
+      if (confirmacion) {
+        const actualizarfavoritos = favoritos.filter((_, i) => i !== index);
+        setFavoritos(actualizarfavoritos);
+        localStorage.setItem('favoritos', JSON.stringify(actualizarfavoritos));
+      }
   };
 
   return (
@@ -103,7 +110,7 @@ function Lista_favorito() {
               text-xl 
               ml-2
               ">
-                <AiOutlineDelete />
+                <AiOutlineDelete  />
               </button>
             </div>
           </li>
